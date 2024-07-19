@@ -1,0 +1,27 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <main>
+            <form id="url-shorten-form">
+                <input type="text" name="url" id="url" />
+                <input type="submit" value="Shorten URL" />
+                <h2>Shortend URL: <a href="" id="shortend-url"></a></h2>
+            </form>
+            <form id="url-info-form">
+                <input type="text" name="urlid" id="urlid" />
+                <input type="submit" value="Get Info" />
+                <div>
+                    <h2>URL info</h2>
+                    <p>clicks: <span id="clicks"></span></p>
+                    <p>url: <span id="url-info"></span></p>
+                    <p>created: <span id="created"></span></p>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>
