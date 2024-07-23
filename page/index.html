@@ -1,27 +1,33 @@
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <script src="main.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style/main.css">
+        <title>Urlslasher</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/custom.css">
     </head>
     <body>
         <main>
-            <form id="url-shorten-form">
-                <input type="text" name="url" id="url" />
-                <input type="submit" value="Shorten URL" />
-                <h2>Shortend URL: <a href="" id="shortend-url"></a></h2>
-            </form>
-            <form id="url-info-form">
-                <input type="text" name="urlid" id="urlid" />
-                <input type="submit" value="Get Info" />
-                <div>
-                    <h2>URL info</h2>
-                    <p>clicks: <span id="clicks"></span></p>
-                    <p>url: <span id="url-info"></span></p>
-                    <p>created: <span id="created"></span></p>
-                </div>
-            </form>
+            <div class="card">
+              <div class="card-body">
+                  <h3 class="card-title">
+                      Shorten Url
+                  </h3>
+                  <p>insert the url to shorten and press the shorten url button</p>
+                  <form action="">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="https://...">
+                    </div>
+                    <div id="shortend-url" class="mb-3">
+                        <p>Shortend URL: <a href=""></a></p>
+                    </div>
+                    <input type="submit" name="" class="form-control btn btn-primary" value="Shorten Url">
+                  </form>
+              </div>
+            </div>
         </main>
+
     </body>
 </html>

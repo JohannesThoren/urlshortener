@@ -37,3 +37,13 @@ pub async fn increment_clicks(id: String, pool: &SqlitePool) -> Result<()> {
         .await?;
     Ok(())
 }
+
+pub async fn create_table_if_not_exist(pool: &SqlitePool) -> Result<()> {
+    sqlx::query(
+        "create table if not exists urls (id text, url text, clicks int, created datetime)",
+    )
+    .execute(pool)
+    .await?;
+
+    Ok(())
+}

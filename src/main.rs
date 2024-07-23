@@ -25,11 +25,7 @@ async fn main() -> Result<()> {
         .await?;
 
     // create the table on startup.
-    sqlx::query(
-        "create table if not exists urls (id text, url text, clicks int, created datetime)",
-    )
-    .execute(&pool)
-    .await?;
+    create_table_if_not_exist(&pool).await?;
 
     let cors = CorsOptions::default()
         .allowed_origins(AllowedOrigins::all())

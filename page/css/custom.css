@@ -1,0 +1,7 @@
+main {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-inline: auto;
+    width: min(90%, 70rem);
+
+}
