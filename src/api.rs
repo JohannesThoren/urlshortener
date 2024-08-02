@@ -1,7 +1,7 @@
-use rocket::{form::Form, response::content, serde::json::Json};
+use rocket::form::Form;
 use sqlx::SqlitePool;
 
-use crate::{database::*, models::url::Url};
+use crate::database::*;
 
 #[post("/url", data = "<url_input>")]
 pub async fn new_url(
