@@ -1,7 +1,9 @@
 use anyhow::Result;
-use chrono::{self, DateTime, Local};
+use chrono::{self};
 use nanoid::nanoid;
 use sqlx::SqlitePool;
+
+use crate::models::url::Url;
 
 pub async fn insert_new_url(url: String, pool: &SqlitePool) -> Result<String> {
     let id = nanoid!(4);
@@ -18,15 +20,10 @@ pub async fn insert_new_url(url: String, pool: &SqlitePool) -> Result<String> {
     Ok(id)
 }
 
-pub async fn get_url_from_id(
-    id: String,
-    pool: &SqlitePool,
-) -> Result<(String, String, i32, DateTime<Local>)> {
-    let res: (String, String, i32, DateTime<Local>) =
-        sqlx::query_as("select * from urls where id = $1")
-            .bind(id)
-            .fetch_one(pool)
-            .await?;
+pub async fn get_url_from_id(id: String, pool: &SqlitePool) -> Result<Url> {
+    let res = sqlx::query_as!(Url, "select *  from urls where id = $1", id)
+        .fetch_one(pool)
+        .await?;
     Ok(res)
 }
 

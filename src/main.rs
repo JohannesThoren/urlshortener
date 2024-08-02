@@ -3,6 +3,7 @@ extern crate rocket;
 
 mod api;
 mod database;
+mod models;
 mod routes;
 
 use api::{get_info, new_url};
@@ -16,20 +17,16 @@ use rocket::http::Method;
 use rocket_cors::{AllowedOrigins, CorsOptions};
 use sqlx::sqlite::SqlitePoolOptions;
 
+use dotenvy;
+
 #[rocket::main]
 async fn main() -> Result<()> {
+    dotenvy::dotenv()?;
     // create a pool and connect to database
     let pool = SqlitePoolOptions::new()
         .max_connections(5)
         .connect(std::env::var("DATABASE_URL")?.as_str())
         .await?;
-
-    // create the table on startup.
-    sqlx::query(
-        "create table if not exists urls (id text, url text, clicks int, created datetime)",
-    )
-    .execute(&pool)
-    .await?;
 
     let cors = CorsOptions::default()
         .allowed_origins(AllowedOrigins::all())

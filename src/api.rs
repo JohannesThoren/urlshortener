@@ -1,6 +1,7 @@
+use rocket::serde::json::Json;
 use sqlx::SqlitePool;
 
-use crate::database::*;
+use crate::{database::*, models::url::Url};
 
 #[get("/new_url?<url>")]
 pub async fn new_url(url: &str, pool: &rocket::State<SqlitePool>) -> Result<String, String> {
@@ -17,20 +18,9 @@ pub async fn new_url(url: &str, pool: &rocket::State<SqlitePool>) -> Result<Stri
 }
 
 #[get("/get_info/<id>")]
-pub async fn get_info(
-    id: &str,
-    pool: &rocket::State<SqlitePool>,
-) -> Result<String, std::io::Error> {
+pub async fn get_info(id: &str, pool: &rocket::State<SqlitePool>) -> Json<Url> {
     match get_url_from_id(id.to_string(), pool).await {
-        Ok(r) => {
-            return Ok(format!(
-                "{{\"id\":\"{}\",\"url\":\"{}\",\"clicks\":{},\"created\":\"{}\"}}",
-                r.0,
-                r.1,
-                r.2,
-                r.3.to_string()
-            ))
-        }
+        Ok(r) => return Json(r),
         Err(_) => todo!(),
     }
 }
