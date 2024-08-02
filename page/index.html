@@ -1,27 +1,40 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <script src="main.js"></script>
-    </head>
-    <body>
-        <main>
-            <form id="url-shorten-form">
-                <input type="text" name="url" id="url" />
-                <input type="submit" value="Shorten URL" />
-                <h2>Shortend URL: <a href="" id="shortend-url"></a></h2>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <main class="flex-grow max-w-3xl mx-auto w-full py-5 space-y-5">
+        <div class="shadow-md p-2 rounded-md">
+            <form class="flex gap-5" id="url-shorten-form" hx-post="/api/v1/url" hx-target="#shortend-url">
+                <input class="bg-gray-100 border-b p-1 flex-grow" type="text" name="url" id="url"
+                    placeholder="https://..." />
+                <input
+                    class=" transition-colors active:bg-sky-300 hover:cursor-pointer  border rounded-md p-2 bg-sky-500 text-white"
+                    type="submit" value="Shorten URL" />
             </form>
-            <form id="url-info-form">
-                <input type="text" name="urlid" id="urlid" />
-                <input type="submit" value="Get Info" />
-                <div>
-                    <h2>URL info</h2>
-                    <p>clicks: <span id="clicks"></span></p>
-                    <p>url: <span id="url-info"></span></p>
-                    <p>created: <span id="created"></span></p>
-                </div>
+            <p>Shortend URL: <a href="" id="shortend-url"></a></h2>
+        </div>
+        <div class="shadow-md p-2 rounded-md">
+            <form class="flex gap-5" id="url-info-form" hx-get="/api/v1/url" hx-target="#url-info-div"
+                hx-swap="innerHTML">
+                <input class="bg-gray-100 border-b p-1 flex-grow" type="text" name="urlid" id="urlid"
+                    placeholder="XXXX" />
+                <input
+                    class=" transition-colors active:bg-sky-300 hover:cursor-pointer  border rounded-md p-2 bg-sky-500 text-white"
+                    type="submit" value="Get Info" />
             </form>
-        </main>
-    </body>
+            <div id="url-info-div">
+            </div>
+        </div>
+
+    </main>
+</body>
+
 </html>
