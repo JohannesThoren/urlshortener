@@ -5,6 +5,7 @@ mod api;
 mod database;
 mod models;
 mod routes;
+mod admin;
 
 use api::{get_info, new_url};
 use database::*;
@@ -44,6 +45,7 @@ async fn main() -> Result<()> {
         .mount("/", FileServer::from("page"))
         .mount("/api/v1", routes![new_url, get_info])
         .mount("/u", routes![go_to_url])
+        // .mount("/auth", routes![])
         .manage(pool)
         .launch()
         .await?;
