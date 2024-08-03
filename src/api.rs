@@ -13,7 +13,7 @@ pub async fn new_url(
             Ok(res) => {
                 info!("{:?}", res);
                 Ok(format!(
-                    "<a href=\"/u/{0}\" id=\"shortend-url\">{0}</a>",
+                    "<a href=\"/u/{0}\" id=\"shortened-url\">{0}</a>",
                     res.id
                 ))
             }
@@ -23,11 +23,11 @@ pub async fn new_url(
     }
 }
 
-#[get("/url?<urlid>")]
-pub async fn get_info(urlid: &str, pool: &rocket::State<SqlitePool>) -> String {
-    match get_url_from_id(urlid.to_string(), pool).await {
+#[get("/url?<id>")]
+pub async fn get_info(id: &str, pool: &rocket::State<SqlitePool>) -> String {
+    match get_url_from_id(id.to_string(), pool).await {
         Ok(r) => {
-            return format!(
+            format!(
                 r"
             <p>clicks {}</p>
             <p>url {}</p>
@@ -35,9 +35,9 @@ pub async fn get_info(urlid: &str, pool: &rocket::State<SqlitePool>) -> String {
         ",
                 r.clicks,
                 r.url,
-                r.created.to_string()
+                r.created
             )
         }
-        Err(_) => return String::from("<p>Not Found!</p>"),
+        Err(_) => String::from("<p>Not Found!</p>"),
     }
 }

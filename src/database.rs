@@ -1,8 +1,6 @@
-use std::fmt::format;
 use anyhow::Result;
 use chrono::{self};
 use nanoid::nanoid;
-use rocket::futures::future::ok;
 use sqlx::SqlitePool;
 
 use crate::models::url::Url;

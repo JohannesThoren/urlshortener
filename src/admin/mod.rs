@@ -1,3 +1,3 @@
-mod auth;
-mod auth_endpoints;
-mod database;
+pub mod auth;
+pub mod auth_endpoints;
+pub mod database;

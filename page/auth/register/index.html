@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+<main class="flex-grow max-w-3xl mx-auto w-full py-5 space-y-5">
+    <form class="shadow-md p-2 rounded-md flex gap-5" hx-post="/auth/register" hx-swap="outerHTML">
+        <label class="hidden" for="email">Email</label><input class="bg-gray-100 border-b p-1 flex-grow" type="email" name="email"
+                                               id="email" placeholder="you@email.com">
+        <input class=" transition-colors active:bg-sky-300 hover:cursor-pointer  border rounded-md p-2 bg-sky-500 text-white"
+               type="submit" value="Register">
+    </form>
+
+</main>
+</body>
+</html>
