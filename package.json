@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "urlshortener",
   "version": "0.1.0",
   "private": true,
   "scripts": {

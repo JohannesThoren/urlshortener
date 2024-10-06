@@ -1,0 +1,6 @@
+/node_modules/
+.gitignore
+.env
+/.next/
+README.md
+LICENSE
