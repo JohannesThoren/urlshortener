@@ -1,18 +1,17 @@
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import client from "../../../../prisma/db";
 import Redirect from "@/app/components/Redirect";
 
-export default async function ({ params }: any) {
+export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params;
-    const url = await (async () => {
-        return client.url.findUnique({ where: { id: id } });
-    })();
+    const url = await client.url.findUnique({ where: { id: id } });
+    if (!url) notFound()
 
-    let source = url?.source!;
+    const source = url.source;
 
     await client.url.update({
         where: { id: id },
-        data: { clicks: url?.clicks! + 1 },
+        data: { clicks: url.clicks + 1 },
     });
 
     return (

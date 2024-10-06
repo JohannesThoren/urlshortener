@@ -1,7 +1,6 @@
 import { validate_session } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
-export default function () {
+export default function Page() {
     validate_session()
     
     return null;
