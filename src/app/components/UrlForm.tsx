@@ -1,11 +1,10 @@
-import { Prisma } from "@prisma/client";
 import client from "../../../prisma/db";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
 
-export default function () {
-  async function shorten(formData: FormData) {
-    "use server";
+export default function UrlForm() {
+    async function shorten(formData: FormData) {
+        "use server";
 
     const existing_url = await client.url.findUnique({
       where: {

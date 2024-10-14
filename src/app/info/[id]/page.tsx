@@ -1,11 +1,9 @@
 import client from "../../../../prisma/db";
 
-export default async function ({ params }: any) {
-  const { id } = params;
+export default async function Page({ params }: { params: { id: string } }) {
+    const { id } = params;
 
-  const url = await (async () => {
-    return client.url.findUnique({ where: { id: id } });
-  })();
+    const url = await client.url.findUnique({ where: { id: id } });
 
   return (
     <main className="grid place-items-center h-screen">
