@@ -28,7 +28,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-stone-900 bg-stone-100`}
       >
-        {children}
+        <main className="grid items-center justify-items-center min-h-screen dark:bg-stone-900 bg-stone-100 w-full p-5">
+          {children}
+        </main>
       </body>
     </html>
   );
