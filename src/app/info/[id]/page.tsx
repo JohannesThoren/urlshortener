@@ -6,7 +6,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const url = await client.url.findUnique({ where: { id: id } });
 
   return (
-    <main className="grid place-items-center h-screen">
+    <main className="grid place-items-center h-full">
       <div>
         <h1 className="text-xl underline  ">
           <a href={`${process.env.SHORT_ROOT_URL}/u/${id}`}>

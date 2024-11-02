@@ -26,11 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-stone-900 bg-stone-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-stone-900 bg-stone-100 flex flex-grow h-screen flex-col`}
       >
-        <main className="grid items-center justify-items-center min-h-screen dark:bg-stone-900 bg-stone-100 w-full p-5">
+        <main className="grid items-center justify-items-center h-full dark:bg-stone-900 bg-stone-100 w-full p-5">
           {children}
         </main>
+        <footer className="p-2">
+          Copyright &copy; 2024 Johannes Thorén
+        </footer>
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     });
 
     return (
-        <div className="grid place-items-center h-screen">
+        <div className="grid place-items-center h-full">
             <Redirect url={source} />
         </div>
     );
