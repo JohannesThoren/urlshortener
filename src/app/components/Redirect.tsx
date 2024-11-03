@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-export default function Redirect({ url }: { url: String }) {
-  let [count, setCount] = useState(1);
-  let count_max = 5;
+export default function Redirect({ url }: { url: string }) {
+  const [count, setCount] = useState(1);
+  const count_max = 5;
 
   setInterval(() => {
     setCount(count + 1);
