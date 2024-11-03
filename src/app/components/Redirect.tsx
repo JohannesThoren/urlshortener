@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function ({ url }: { url: String }) {
+export default function Redirect({ url }: { url: String }) {
   let [count, setCount] = useState(1);
   let count_max = 5;
 
