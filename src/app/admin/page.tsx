@@ -1,7 +1,15 @@
-import { validate_session } from "@/lib/auth";
+import { CreateDefaultAdmin, ValidateSession } from "@/lib/admin_auth";
+import List from "./List";
 
-export default function Page() {
-    validate_session()
-    
-    return null;
+export default async function Page() {
+    await CreateDefaultAdmin()
+    let user = await ValidateSession();
+
+
+
+    return (
+        <div className="w-full h-full flex flex-col">
+            <List/>
+        </div>
+    );
 }

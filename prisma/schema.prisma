@@ -19,7 +19,10 @@ model url {
 }
 
 model admin {
-  id           Int    @id @unique @default(autoincrement())
-  email        String @unique
-  passwordHash String @unique
+  id              Int      @id @unique @default(autoincrement())
+  email           String   @unique
+  passwordHash    String   @unique
+  session         String   @unique
+  session_expires DateTime
+  active          Boolean  @default(true)
 }
