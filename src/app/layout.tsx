@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,8 +32,9 @@ export default function RootLayout({
         <main className="grid items-center justify-items-center h-full dark:bg-stone-900 bg-stone-100 w-full p-5">
           {children}
         </main>
-        <footer className="p-2">
-          Copyright &copy; 2024 Johannes Thorén
+        <footer className="p-2 flex justify-between">
+          <p>Copyright &copy; 2024 Johannes Thorén</p>
+          <Link className="dark:text-stone-700 text-stone-300" href={"/admin"}>Admin Page</Link>
         </footer>
       </body>
     </html>

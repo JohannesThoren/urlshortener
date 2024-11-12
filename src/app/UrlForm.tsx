@@ -1,4 +1,4 @@
-import client from "../../../prisma/db";
+import client from "../../prisma/db";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
 

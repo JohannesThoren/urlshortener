@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import client from "../../../../prisma/db";
-import Redirect from "@/app/components/Redirect";
+import Redirect from "@/app/u/[id]/Redirect";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params;
