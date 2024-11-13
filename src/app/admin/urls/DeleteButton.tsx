@@ -3,7 +3,6 @@ import client from "../../../../prisma/db";
 import { redirect } from "next/navigation";
 import Button from "@/components/Button";
 import { LogUrlDeleted } from "@/lib/Event";
-import { cookies } from "next/headers";
 import { ValidateSession } from "@/lib/AdminAuth";
 
 export default function DeleteButton({
@@ -17,7 +16,7 @@ export default function DeleteButton({
 }) {
     async function Delete() {
         "use server";
-        let admin = await ValidateSession()
+        const admin = await ValidateSession()
         await client.url.delete({ where: { id: id } });
         
 

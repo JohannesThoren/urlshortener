@@ -1,7 +1,7 @@
 import client from "../../../../prisma/db";
 
 export default async function EventList() {
-    let events = await (await client.event.findMany()).reverse();
+    const events = await (await client.event.findMany()).reverse();
 
     return (
         <table className="w-full">

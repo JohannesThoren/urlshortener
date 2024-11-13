@@ -1,14 +1,12 @@
 import ErrorMessage from "@/components/ErrorMesssage";
 import { AuthAdmin } from "@/lib/AdminAuth";
-import { nanoid } from "nanoid";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default function LoginForm() {
     async function signin(formData: FormData) {
         "use server";
-        let email = formData.get("email")?.toString();
-        let password = formData.get("password")?.toString();
+        const email = formData.get("email")?.toString();
+        const password = formData.get("password")?.toString();
         if (email == undefined || password == undefined) return;
 
         if(await AuthAdmin(email, password)) redirect("/admin");

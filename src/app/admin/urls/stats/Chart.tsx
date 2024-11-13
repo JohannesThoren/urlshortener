@@ -4,7 +4,6 @@ import {
     CartesianGrid,
     Line,
     LineChart,
-    ResponsiveContainer,
     Tooltip,
     XAxis,
     YAxis,
@@ -13,7 +12,7 @@ import {
 export default function Chart({
     data,
 }: {
-    data: { key: string; value: Number }[];
+    data: { key: string; value: number }[];
 }) {
     console.log(data);
     return (

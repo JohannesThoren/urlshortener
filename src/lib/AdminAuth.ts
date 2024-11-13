@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import client from "../../prisma/db";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
-import { compare, compareSync, hashSync, genSaltSync } from "bcrypt";
+import { compare, hashSync, genSaltSync } from "bcrypt";
 import { LogAdminLogin } from "./Event";
 
 const ADMIN_LOGIN_ROUTE = "/admin/login";
@@ -50,7 +50,7 @@ export async function AuthAdmin(email: string, password: string) {
 }
 
 export async function CreateSessionToken(id: number) {
-    let token = nanoid(128);
+    const token = nanoid(128);
     const expires = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 
     await client.admin.update({
@@ -67,7 +67,7 @@ export async function CreateSessionToken(id: number) {
 }
 
 export async function CreateDefaultAdmin() {
-    let admins = await client.admin.findMany();
+    const admins = await client.admin.findMany();
     if (admins.length > 0) return;
 
     const salt = genSaltSync();

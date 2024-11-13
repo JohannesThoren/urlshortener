@@ -16,12 +16,12 @@ function CountDate(
     }[]
 ): {
     key: string;
-    value: Number;
+    value: number;
 }[] {
-    let map = new Map();
+    const map = new Map();
 
     events.forEach((e) => {
-        let date = new Date(e.time_stamp.toUTCString()).toLocaleDateString();
+        const date = new Date(e.time_stamp.toUTCString()).toLocaleDateString();
 
         map.set(date, map.get(date) == undefined ? 1 : map.get(date) + 1);
     });
@@ -35,19 +35,19 @@ export default async function Page({ params }: { params: { id: string } }) {
     await ValidateSession();
     const { id } = params;
     if (id == undefined) redirect("/admin");
-    let events = await client.event.findMany({
+    const events = await client.event.findMany({
         where: {
             event_data: id,
             event_type: EventTypeToString(EventType.URL_USED),
         },
     });
 
-    let data = CountDate(events);
+    const data = CountDate(events);
 
     return (
-        <div className="w-full h-full">
-            <h1>{id}</h1>
+        <div className="w-1/2 h-full">
             <Chart data={data} />
+
         </div>
     );
 }

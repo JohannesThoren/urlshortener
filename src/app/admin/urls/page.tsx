@@ -3,7 +3,7 @@ import UrlList from "./UrlList"
 
 export default async function Page() {
     await CreateDefaultAdmin()
-    let user = await ValidateSession();
+    await ValidateSession();
 
 
 
