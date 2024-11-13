@@ -1,6 +1,7 @@
 import ErrorMessage from "@/components/ErrorMesssage";
 import { AuthAdmin } from "@/lib/AdminAuth";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export default function LoginForm() {
     async function signin(formData: FormData) {
@@ -9,8 +10,7 @@ export default function LoginForm() {
         const password = formData.get("password")?.toString();
         if (email == undefined || password == undefined) return;
 
-        if(await AuthAdmin(email, password)) redirect("/admin");
-        
+        if (await AuthAdmin(email, password)) redirect("/admin");
     }
 
     return (
@@ -18,7 +18,9 @@ export default function LoginForm() {
             action={signin}
             className="grid gap-2 w-full [&>input]:w-full md:w-[40dvw] lg:w-[20dvw]"
         >
-            <ErrorMessage />
+            <Suspense fallback={"Loading"}>
+                <ErrorMessage />
+            </Suspense>
 
             <input
                 name="email"
