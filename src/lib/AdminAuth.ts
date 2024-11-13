@@ -68,6 +68,7 @@ export async function CreateSessionToken(id: number) {
 
 export async function CreateDefaultAdmin() {
     const admins = await client.admin.findMany();
+    console.log(admins)
     if (admins.length > 0) return;
 
     if (await client.admin.findFirst({
