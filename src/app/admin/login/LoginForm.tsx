@@ -1,4 +1,5 @@
-import { AuthAdmin } from "@/lib/admin_auth";
+import ErrorMessage from "@/components/ErrorMesssage";
+import { AuthAdmin } from "@/lib/AdminAuth";
 import { nanoid } from "nanoid";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -19,6 +20,8 @@ export default function LoginForm() {
             action={signin}
             className="grid gap-2 w-full [&>input]:w-full md:w-[40dvw] lg:w-[20dvw]"
         >
+            <ErrorMessage />
+
             <input
                 name="email"
                 type="email"

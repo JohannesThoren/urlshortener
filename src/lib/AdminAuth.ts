@@ -3,6 +3,7 @@ import client from "../../prisma/db";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
 import { compare, compareSync, hashSync, genSaltSync } from "bcrypt";
+import { LogAdminLogin } from "./Event";
 
 const ADMIN_LOGIN_ROUTE = "/admin/login";
 const ADMIN_NOT_FOUND_ERROR =
@@ -36,7 +37,7 @@ export async function AuthAdmin(email: string, password: string) {
     });
 
     if (!admin || !admin.active)
-        redirect(ADMIN_LOGIN_ROUTE + "?error=?" + ADMIN_NOT_FOUND_ERROR);
+        redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
 
     const hash = admin.passwordHash;
 
@@ -44,6 +45,7 @@ export async function AuthAdmin(email: string, password: string) {
         redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
 
     await CreateSessionToken(admin.id)
+    await LogAdminLogin(admin.id.toString())
     return true;
 }
 
@@ -84,8 +86,7 @@ export async function CreateDefaultAdmin() {
     });
 
     console.log(
-        `Default admin email = '${
-            process.env.DEFAULT_ADMIN_EMAIL || "admin@example.com"
+        `Default admin email = '${process.env.DEFAULT_ADMIN_EMAIL || "admin@example.com"
         }', password = '${process.env.DEFAULT_ADMIN_PASSWORD || "password"}'`
     );
 }

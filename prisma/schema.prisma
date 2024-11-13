@@ -26,3 +26,11 @@ model admin {
   session_expires DateTime
   active          Boolean  @default(true)
 }
+
+model event {
+  id         Int      @id @unique @default(autoincrement())
+  event_type String
+  event_data String
+  by         String   @default("N/A")
+  time_stamp DateTime @default(now())
+}
