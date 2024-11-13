@@ -71,11 +71,14 @@ export async function CreateDefaultAdmin() {
     console.log(admins)
     if (admins.length > 0) return;
 
-    if (await client.admin.findFirst({
+    const existing_admin = await client.admin.findFirst({
         where: {
             email: process.env.DEFAULT_ADMIN_EMAIL
         }
-    }) != null) return;
+    })
+
+    console.log(existing_admin, existing_admin != null)
+    if (existing_admin != null) return
 
 
     const salt = genSaltSync();
