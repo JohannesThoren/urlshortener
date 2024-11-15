@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import client from "../../prisma/db";
 import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
-import { compare, hashSync, genSaltSync } from "bcrypt";
+import { compare, hashSync, genSaltSync, genSalt, hash } from "bcrypt";
 import { LogAdminLogin } from "./Event";
 
 const ADMIN_LOGIN_ROUTE = "/admin/login";
@@ -36,17 +36,27 @@ export async function AuthAdmin(email: string, password: string) {
         where: { email: email },
     });
 
+    console.log(admin)
+
     if (!admin || !admin.active)
         redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
 
     const hash = admin.passwordHash;
+    console.log(hash)
 
-    if (!(await compare(password, hash)))
-        redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
+    console.log(password, password.length)
 
-    await CreateSessionToken(admin.id)
-    await LogAdminLogin(admin.id.toString())
-    return true;
+    const result = await compare(password, hash) 
+    console.log(result)
+
+    if (result) {
+        console.log("logging in admin")
+        await CreateSessionToken(admin.id)
+        await LogAdminLogin(admin.id.toString())
+        return true;
+    }
+    
+    redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
 }
 
 export async function CreateSessionToken(id: number) {
@@ -68,7 +78,6 @@ export async function CreateSessionToken(id: number) {
 
 export async function CreateDefaultAdmin() {
     const admins = await client.admin.findMany();
-    console.log(admins)
     if (admins.length > 0) return;
 
     const existing_admin = await client.admin.findFirst({
@@ -77,7 +86,6 @@ export async function CreateDefaultAdmin() {
         }
     })
 
-    console.log(existing_admin, existing_admin != null)
     if (existing_admin != null) return
 
 
@@ -86,7 +94,6 @@ export async function CreateDefaultAdmin() {
         process.env.DEFAULT_ADMIN_PASSWORD || "password",
         salt
     );
-
     await client.admin.create({
         data: {
             email: process.env.DEFAULT_ADMIN_EMAIL || "admin@example.com",
@@ -100,4 +107,25 @@ export async function CreateDefaultAdmin() {
         `Default admin email = '${process.env.DEFAULT_ADMIN_EMAIL || "admin@example.com"
         }', password = '${process.env.DEFAULT_ADMIN_PASSWORD || "password"}'`
     );
+}
+
+
+export async function NewAdmin(email: string, password: string) {
+
+    const salt = await genSalt();
+    const passwordHash = await hash(password, salt)
+
+    console.log(passwordHash)
+
+    const new_admin = await client.admin.create({
+        data: {
+            email: email,
+            passwordHash: passwordHash,
+            session: nanoid(128),
+            session_expires: new Date(),
+        },
+    });
+
+    return new_admin
+
 }

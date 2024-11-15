@@ -14,7 +14,7 @@ export default async function EventList() {
                     <th>Time Stamp</th>
                 </tr>
             </thead>
-            <tbody className="[&>*:nth-child(even)]:bg-stone-700">
+            <tbody className="dark:[&>*:nth-child(even)]:bg-stone-800 [&>*:nth-child(even)]:bg-stone-200 ">
                 {events.map((e) => (
                     <tr key={e.id}>
                         <td className="text-center">{e.id}</td>

@@ -6,14 +6,12 @@ import { LogUrlDeleted } from "@/lib/Event";
 import { ValidateSession } from "@/lib/AdminAuth";
 import { MdOutlineDelete } from "react-icons/md";
 
-export default function DeleteButton({ id }: { id: string }) {
+export default function DeleteButton({ id }: { id: number }) {
     async function Delete() {
         "use server";
-        const admin = await ValidateSession();
-        await client.url.delete({ where: { id: id } });
+        await client.admin.delete({ where: { id: id } });
 
-        await LogUrlDeleted(id, admin.id.toString());
-        redirect("/admin/urls");
+        redirect("/admin/adminusers");
     }
 
     return (

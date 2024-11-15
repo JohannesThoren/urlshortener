@@ -1,3 +1,4 @@
+import exp from "constants";
 import client from "../../prisma/db";
 
 export enum EventType {
@@ -38,4 +39,9 @@ export async function LogUrlDeleted(id: string, by: string) {
 
 export async function LogAdminLogin(id: string) {
     await LogEvent(EventType.ADMIN_LOGIN, id, "ADMIN")
+}
+
+export async function LogAdminCreated(newAdminId: string, byId: string) {
+    await LogEvent(EventType.ADMIN_ACCOUNT_CREATED, newAdminId, byId)
+
 }

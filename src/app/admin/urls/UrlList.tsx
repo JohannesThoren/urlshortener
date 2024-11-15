@@ -41,12 +41,7 @@ export default async function UrlList() {
                                     <MdOutlineStackedBarChart />
                                 </Link>
 
-                                <DeleteButton
-                                    id={u.id}
-                                    className="bg-red-500 p-1 rounded-md"
-                                >
-                                    <MdOutlineDelete />
-                                </DeleteButton>
+                                <DeleteButton id={u.id} />
                             </td>
                         </tr>
                     ))
