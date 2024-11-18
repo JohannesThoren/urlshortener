@@ -41,7 +41,7 @@ export async function LogAdminLogin(id: string) {
     await LogEvent(EventType.ADMIN_LOGIN, id, "ADMIN")
 }
 
-export async function LogAdminCreated(newAdminId: string, byId: string) {
-    await LogEvent(EventType.ADMIN_ACCOUNT_CREATED, newAdminId, byId)
+export async function LogAdminCreated(newAdminId: number, byId: number) {
+    await LogEvent(EventType.ADMIN_ACCOUNT_CREATED, newAdminId.toString(), byId.toString())
 
 }

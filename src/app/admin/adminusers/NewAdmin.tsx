@@ -3,9 +3,10 @@ import Form from "@/components/Form";
 import Input from "@/components/Input";
 import Submit from "@/components/Submit";
 import { NewAdmin } from "@/lib/AdminAuth";
+import { LogAdminCreated } from "@/lib/Event";
 import { redirect } from "next/navigation";
 
-export default async function NewAdminForm() {
+export default async function NewAdminForm({ adminId }: { adminId: number }) {
     async function CreateAdmin(formData: FormData) {
         "use server";
         const email = formData.get("email")?.toString();
@@ -17,6 +18,7 @@ export default async function NewAdminForm() {
             redirect("/admin/adminusers?error=Ivalid password provided");
 
         const new_admin = await NewAdmin(email, password);
+        await LogAdminCreated(new_admin.id, adminId);
         redirect("/admin/adminusers?reload=true");
     }
 
@@ -25,7 +27,7 @@ export default async function NewAdminForm() {
             children={
                 <div className="justify-center items-center flex flex-col w-full h-full">
                     <h2 className="text-2xl">New Admin Account</h2>
-                    <Form action={CreateAdmin}>
+                    <Form  action={CreateAdmin}>
                         <div>
                             <label htmlFor="email">Email</label>
                             <br />
