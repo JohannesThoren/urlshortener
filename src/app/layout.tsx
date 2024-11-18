@@ -36,35 +36,31 @@ export default function RootLayout({
                 <footer className="p-2 flex justify-between">
                     <p>Copyright &copy; 2024 Johannes Thorén</p>
                     <div className="flex justify-between [&>*]:mx-1">
-                        <Dialog
-                            children={
-                                <>
-                                    <h2 className="text-2xl">About</h2>
-                                    <p>
-                                        This is a url shortener made only for
-                                        fun. It is open source and all code can
-                                        be found on my (Johannes Thorén) github
-                                        page. Due to it being in active
-                                        development, all data and links may be
-                                        deleted or replaced.
-                                    </p>
-                                    <h2 className="text-2xl">Malicious link</h2>
-                                    <p>
-                                        This Url shortener is not moderated
-                                        actively but feel free to contact me if
-                                        you get sent of find a malicious link.
-                                        Contact info can be found{" "}
-                                        <a
-                                            className="text-blue-500 underline"
-                                            href="http://lgjt.xyz/contact"
-                                        >
-                                            Here
-                                        </a>
-                                    </p>
-                                </>
-                            }
-                            button={<button>About</button>}
-                        ></Dialog>
+                        <Dialog button={<button>About</button>}>
+                            <>
+                                <h2 className="text-2xl">About</h2>
+                                <p>
+                                    This is a url shortener made only for fun.
+                                    It is open source and all code can be found
+                                    on my (Johannes Thorén) github page. Due to
+                                    it being in active development, all data and
+                                    links may be deleted or replaced.
+                                </p>
+                                <h2 className="text-2xl">Malicious link</h2>
+                                <p>
+                                    This Url shortener is not moderated actively
+                                    but feel free to contact me if you get sent
+                                    of find a malicious link. Contact info can
+                                    be found{" "}
+                                    <a
+                                        className="text-blue-500 underline"
+                                        href="http://lgjt.xyz/contact"
+                                    >
+                                        Here
+                                    </a>
+                                </p>
+                            </>
+                        </Dialog>
                         <Link
                             className="dark:text-stone-700 text-stone-300"
                             href={"/admin"}

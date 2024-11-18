@@ -5,10 +5,6 @@ import DeleteButton from "./DeleteButton";
 export default async function AdminList() {
     const admins = (await client.admin.findMany()).reverse();
 
-    async function DeleteAdminAccount(id: Number) {
-        "use server";
-    }
-
     return (
         <table className="w-full">
             <thead>
@@ -28,17 +24,16 @@ export default async function AdminList() {
                         </td>
                         <td className="flex justify-end gap-1">
                             <Dialog
-                                children={
-                                    <div className="rounded-md p-2 bg-stone-800 w-[10rem] h-[10rem]">
-                                        <p>hej</p>
-                                    </div>
-                                }
                                 button={
                                     <button className="bg-blue-500 px-1 rounded-md">
                                         Edit
                                     </button>
                                 }
-                            ></Dialog>
+                            >
+                                <div className="rounded-md p-2 bg-stone-800 w-[10rem] h-[10rem]">
+                                    <p>hej</p>
+                                </div>
+                            </Dialog>
                             <DeleteButton id={a.id}></DeleteButton>
                         </td>
                     </tr>

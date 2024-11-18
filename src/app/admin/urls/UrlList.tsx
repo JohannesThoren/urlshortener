@@ -1,5 +1,5 @@
 import client from "../../../../prisma/db";
-import { MdOutlineDelete, MdOutlineStackedBarChart } from "react-icons/md";
+import {MdOutlineStackedBarChart } from "react-icons/md";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 

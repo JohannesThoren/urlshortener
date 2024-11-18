@@ -1,4 +1,3 @@
-import exp from "constants";
 import client from "../../prisma/db";
 
 export enum EventType {

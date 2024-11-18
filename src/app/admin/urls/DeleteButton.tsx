@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import client from "../../../../prisma/db";
 import { redirect } from "next/navigation";
 import Button from "@/components/Button";

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Button from "@/components/Button";
 import { MdOutlineDelete } from "react-icons/md";
 import { ValidateSession } from "@/lib/AdminAuth";
-import { LogAdminDeleted, LogUrlDeleted } from "@/lib/Event";
+import { LogAdminDeleted } from "@/lib/Event";
 
 export default function DeleteButton({ id }: { id: number }) {
     async function Delete() {

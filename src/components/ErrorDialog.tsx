@@ -4,8 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function ErrorDialog() {
-    let params = useSearchParams();
-    let error = params.get("error");
+    const params = useSearchParams();
+    const error = params.get("error");
     const [open, setOpen] = useState(error != null);
 
     return (
