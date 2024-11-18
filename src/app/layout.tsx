@@ -18,7 +18,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: {
         template: "%s | LGJT.XYZ",
-        default: "LGJT.XYZ",
+        default: "URL | LGJT.XYZ",
     },
     description: "A open source url shortener tool with no ads",
     authors: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: {
             template: "%s | LGJT.XYZ",
-            default: "LGJT.XYZ",
+            default: "URL | LGJT.XYZ",
         },
         description: "A open source url shortener tool with no ads",
     },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     twitter: {
         title: {
             template: "%s | LGJT.XYZ",
-            default: "LGJT.XYZ",
+            default: "URL | LGJT.XYZ",
         },
         description: "A open source url shortener tool with no ads",
     },
