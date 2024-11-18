@@ -1,16 +1,17 @@
-import { ReactNode } from "react";
 import client from "../../../../prisma/db";
 import { redirect } from "next/navigation";
 import Button from "@/components/Button";
-import { LogUrlDeleted } from "@/lib/Event";
-import { ValidateSession } from "@/lib/AdminAuth";
 import { MdOutlineDelete } from "react-icons/md";
+import { ValidateSession } from "@/lib/AdminAuth";
+import { LogAdminDeleted, LogUrlDeleted } from "@/lib/Event";
 
 export default function DeleteButton({ id }: { id: number }) {
     async function Delete() {
         "use server";
+        const admin = await ValidateSession();
         await client.admin.delete({ where: { id: id } });
 
+        await LogAdminDeleted(id, admin.id);
         redirect("/admin/adminusers");
     }
 

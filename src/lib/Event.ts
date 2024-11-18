@@ -43,5 +43,9 @@ export async function LogAdminLogin(id: string) {
 
 export async function LogAdminCreated(newAdminId: number, byId: number) {
     await LogEvent(EventType.ADMIN_ACCOUNT_CREATED, newAdminId.toString(), byId.toString())
+}
+
+export async function LogAdminDeleted(deletedAdminId: number, byId: number) {
+    await LogEvent(EventType.ADMIN_ACCOUNT_DELETED, deletedAdminId.toString(), byId.toString())
 
 }
