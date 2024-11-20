@@ -22,7 +22,7 @@ export default async function UrlList() {
                     <th>Email</th>
                 </tr>
             </thead>
-            <tbody className="dark:[&>*:nth-child(evem)]:bg-stone-800, [&>*:nth-child(even)]:bg-stone-200">
+            <tbody className="dark:[&>*:nth-child(even)]:bg-stone-800, [&>*:nth-child(even)]:bg-stone-200">
                 {urls.length > 0 ? (
                     urls.map((u) => (
                         <tr key={u.id}>
