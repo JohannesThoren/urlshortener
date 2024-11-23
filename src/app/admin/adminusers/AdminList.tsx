@@ -22,7 +22,7 @@ export default async function AdminList() {
                         <td className="text-center">
                             {a.session_expires.toUTCString()}
                         </td>
-                        <td className="flex justify-end gap-1">
+                        <td className="flex justify-end gap-1 h-full">
                             <Dialog
                                 button={
                                     <button className="bg-blue-500 px-1 rounded-md">

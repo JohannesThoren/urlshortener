@@ -26,7 +26,7 @@ export default function Dialog({
                     id="backdrop"
                     className="fixed z-50 inset-0 bg-black/10 backdrop-blur grid place-items-center"
                 >
-                    <div className="flex flex-col w-[95dvw] h-[95dvh] md:w-[70%] md:h-fit lg:w-[40%]">
+                    <div className="flex flex-col w-[95dvw] h-[95dvh] md:w-[70%] md:h-fit lg:w-[40%] items-center">
                         <button
                             className="p-1 dark:bg-stone-800 rounded-md bg-stone-200 my-2 w-fit ml-auto text-2xl"
                             onClick={() => {

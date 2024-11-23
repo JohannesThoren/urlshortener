@@ -1,5 +1,5 @@
 import client from "../../../../prisma/db";
-import {MdOutlineStackedBarChart } from "react-icons/md";
+import { MdOutlineStackedBarChart } from "react-icons/md";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 
@@ -16,32 +16,38 @@ export default async function UrlList() {
             <thead className="static">
                 <tr>
                     <th>ID</th>
-                    <th>Source Url</th>
+                    <th className="w-1/2">Source Url</th>
                     <th>Clicks</th>
                     <th>Created</th>
                     <th>Email</th>
                 </tr>
             </thead>
-            <tbody className="dark:[&>*:nth-child(even)]:bg-stone-800 [&>*:nth-child(even)]:bg-stone-200">
+            <tbody className="dark:[&>*:nth-child(even)]:bg-stone-800 [&>*:nth-child(even)]:bg-stone-200 w-full">
                 {urls.length > 0 ? (
                     urls.map((u) => (
                         <tr key={u.id}>
                             <td className="text-center">{u.id}</td>
-                            <td>{u.source}</td>
+                            <td className="h-full flex" title={u.source}>
+                                <div className="h-full truncate w-0 flex-grow">
+                                    {u.source}
+                                </div>
+                            </td>
                             <td className="text-center">{u.clicks}</td>
                             <td className="text-center">
                                 {u.created ? u.created.toUTCString() : "N/A"}
                             </td>
                             <td className="text-center">{u.email || "N/A"}</td>
-                            <td className="flex justify-end gap-1">
-                                <Link
-                                    href={"/admin/urls/stats/" + u.id}
-                                    className="bg-blue-500 p-1 rounded-md"
-                                >
-                                    <MdOutlineStackedBarChart />
-                                </Link>
+                            <td>
+                                <div className="flex justify-end items-center gap-1">
+                                    <Link
+                                        href={"/admin/urls/stats/" + u.id}
+                                        className="bg-blue-500 p-1 rounded-md"
+                                    >
+                                        <MdOutlineStackedBarChart />
+                                    </Link>
 
-                                <DeleteButton id={u.id} />
+                                    <DeleteButton id={u.id} />
+                                </div>
                             </td>
                         </tr>
                     ))
