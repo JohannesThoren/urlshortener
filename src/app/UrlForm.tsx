@@ -1,34 +1,6 @@
-import { LogUrlCreated } from "@/lib/Event";
-import client from "../../prisma/db";
-import { nanoid } from "nanoid";
-import { redirect } from "next/navigation";
+import shorten from "@/lib/Url";
 
 export default function UrlForm() {
-    async function shorten(formData: FormData) {
-        "use server";
-
-        const existing_url = await client.url.findUnique({
-            where: {
-                source: formData.get("url")?.toString() || "",
-            },
-        });
-
-        if (existing_url != undefined) {
-            redirect(`/info/${existing_url.id}`);
-        }
-
-        const url = await client.url.create({
-            data: {
-                id: nanoid(6),
-                source: formData.get("url")?.toString() || "",
-                email: formData.get("email")?.toString(),
-            },
-        });
-
-        await LogUrlCreated(url.id, formData.get("email")?.toString());
-        redirect(`/info/${url.id}`);
-    }
-
     return (
         <form
             className="grid gap-2 w-full [&>input]:w-full md:w-4/6 lg:w-1/2"
