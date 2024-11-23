@@ -16,7 +16,9 @@ export function EventTypeToString(type: EventType): string {
 async function LogEvent(type: EventType, data: string, by?: string) {
     await client.event.create({
         data: {
+            /* eslint-disable camelcase */
             event_type: EventTypeToString(type),
+            /* eslint-disable camelcase */
             event_data: data,
             by: by
         }
@@ -28,7 +30,7 @@ export async function LogUrlUsed(id: string) {
 }
 
 
-export async function LogUrlCreated(source: string, by?: string) {
+export async function LogUrlCreated(source: string, by?: string | null) {
     if (source != "") await LogEvent(EventType.URL_CREATED, source, by || "USER")
 }
 

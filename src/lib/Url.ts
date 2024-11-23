@@ -3,27 +3,33 @@ import client from "../../prisma/db";
 import { nanoid } from "nanoid";
 import { LogUrlCreated } from "./Event";
 
-export default async function shorten(formData: FormData) {
+export async function shorten(sourceUrl: string, email?: string | null): Promise<string> {
     "use server";
 
-    const existing_url = await client.url.findUnique({
+    const existingUrl = await client.url.findUnique({
         where: {
-            source: formData.get("url")?.toString() || "",
+            source: sourceUrl,
         },
     });
 
-    if (existing_url != undefined) {
-        redirect(`/info/${existing_url.id}`);
+    if (existingUrl != undefined) {
+        return existingUrl.id
     }
 
     const url = await client.url.create({
         data: {
             id: nanoid(6),
-            source: formData.get("url")?.toString() || "",
-            email: formData.get("email")?.toString(),
+            source: sourceUrl,
+            email: email,
         },
     });
 
-    await LogUrlCreated(url.id, formData.get("email")?.toString());
-    redirect(`/info/${url.id}`);
+    await LogUrlCreated(url.id, email);
+    return url.id
+}
+
+export async function shortenAndRedirect(sourceUrl: string, email?: string | null) {
+    "use server";
+    const urlId = await shorten(sourceUrl, email)
+    redirect(`/info/${urlId}`);
 }

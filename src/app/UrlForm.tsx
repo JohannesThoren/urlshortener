@@ -1,10 +1,19 @@
-import shorten from "@/lib/Url";
+import { shortenAndRedirect } from "@/lib/Url";
 
 export default function UrlForm() {
+    async function shortenUrl(formData: FormData) {
+        "use server"
+        const sourceUrl = formData.get("url");
+        if (sourceUrl == undefined) return;
+        const email = formData.get("email");
+
+        await shortenAndRedirect(sourceUrl.toString(), email?.toString());
+    }
+
     return (
         <form
             className="grid gap-2 w-full [&>input]:w-full md:w-4/6 lg:w-1/2"
-            action={shorten}
+            action={shortenUrl}
         >
             <input
                 name="url"
