@@ -17,8 +17,8 @@ export default async function NewAdminForm({ adminId }: { adminId: number }) {
         if (password == undefined)
             redirect("/admin/adminusers?error=Ivalid password provided");
 
-        const new_admin = await NewAdmin(email, password);
-        await LogAdminCreated(new_admin.id, adminId);
+        const newAdmin = await NewAdmin(email, password);
+        await LogAdminCreated(newAdmin.id, adminId);
         redirect("/admin/adminusers?reload=true");
     }
 

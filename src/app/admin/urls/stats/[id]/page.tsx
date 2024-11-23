@@ -37,7 +37,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (id == undefined) redirect("/admin");
     const events = await client.event.findMany({
         where: {
+            // eslint-disable-next-line camelcase
             event_data: id,
+            // eslint-disable-next-line camelcase
             event_type: EventTypeToString(EventType.URL_USED),
         },
     });
