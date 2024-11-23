@@ -46,7 +46,7 @@ export async function AuthAdmin(email: string, password: string) {
 
     console.log(password, password.length)
 
-    const result = await compare(password, hash) 
+    const result = await compare(password, hash)
     console.log(result)
 
     if (result) {
@@ -55,7 +55,7 @@ export async function AuthAdmin(email: string, password: string) {
         await LogAdminLogin(admin.id.toString())
         return true;
     }
-    
+
     redirect(ADMIN_LOGIN_ROUTE + "?error=" + ADMIN_NOT_FOUND_ERROR);
 }
 
@@ -69,6 +69,8 @@ export async function CreateSessionToken(id: number) {
         },
         data: {
             session: token,
+
+            // eslint-disable-next-line camelcase
             session_expires: expires,
         },
     });
@@ -79,13 +81,13 @@ export async function CreateSessionToken(id: number) {
 export async function CreateDefaultAdmin() {
     const admins = await client.admin.findMany();
     if (admins.length > 0) return;
-
+    // eslint-disable-next-line camelcase
     const existing_admin = await client.admin.findFirst({
         where: {
             email: process.env.DEFAULT_ADMIN_EMAIL
         }
     })
-
+    // eslint-disable-next-line camelcase
     if (existing_admin != null) return
 
 
@@ -99,6 +101,7 @@ export async function CreateDefaultAdmin() {
             email: process.env.DEFAULT_ADMIN_EMAIL || "admin@example.com",
             passwordHash: passwordHash,
             session: nanoid(128),
+            // eslint-disable-next-line camelcase
             session_expires: new Date(),
         },
     });
@@ -116,16 +119,17 @@ export async function NewAdmin(email: string, password: string) {
     const passwordHash = await hash(password, salt)
 
     console.log(passwordHash)
-
-    const new_admin = await client.admin.create({
+    // eslint-disable-next-line camelcase
+    const newAdmin = await client.admin.create({
         data: {
             email: email,
             passwordHash: passwordHash,
             session: nanoid(128),
+            // eslint-disable-next-line camelcase
             session_expires: new Date(),
         },
     });
-
-    return new_admin
+    // eslint-disable-next-line camelcase
+    return newAdmin
 
 }
